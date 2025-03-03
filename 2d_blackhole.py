@@ -6,7 +6,17 @@ from matplotlib.colors import LinearSegmentedColormap
 # Constants
 G = 6.67430e-11  # Gravitational constant (m^3/kg/s^2)
 c = 3e8  # Speed of light (m/s)
-M = eval(input("Enter the mass of the blackhole: "))  # Black hole mass (kg)
+
+# Black hole mass (kg)
+try:
+    user_mass = float(input("Enter the mass of the black hole (in terms of solar masses; e.g, 5): "))
+    M = user_mass * 1.989e30 #converting solar mass to kgs
+
+except ValueError:
+    print("Invalid! Taking the default mass (5 solar masses)")
+    M = 5e30 #default solar mass
+
+
 Rs = 2 * G * M / c**2  # Schwarzschild radius
 
 # Create a figure
@@ -85,6 +95,8 @@ def update(frame):
 
     return stars, *disk_lines
 
+mass_text = f"Black hole mass: {M} in terms of solar masses"
+
 # Setup Animation
 ax.set_xlim(-5 * Rs, 5 * Rs)
 ax.set_ylim(-5 * Rs, 5 * Rs)
@@ -92,6 +104,7 @@ ax.set_xticks([])
 ax.set_yticks([])
 ax.set_aspect('equal', adjustable='datalim')  # Keep black hole perfectly circular
 ax.set_title("Animated 2D Black Hole Simulation", color="white")
+ax.set_xlabel(mass_text , color = 'white')
 
 ani = animation.FuncAnimation(fig, update, frames=200, interval=50, blit=True)
 
