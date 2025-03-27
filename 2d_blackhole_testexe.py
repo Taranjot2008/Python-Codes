@@ -3,11 +3,15 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.colors import LinearSegmentedColormap
 
+name = input("Enter the name of the black hole:")
+b_name = name.title()
+
 # Constants
 G = 6.67430e-11  # Gravitational constant (m^3/kg/s^2)
 c = 3e8  # Speed of light (m/s)
-M = eval(input("Enter the mass of the blackhole: "))  # Black hole mass (kg)
+M = eval(input("Enter the mass of the black hole: "))  # Black hole mass (kg)
 Rs = 2 * G * M / c**2  # Schwarzschild radius
+
 
 # Create a figure
 fig, ax = plt.subplots(figsize=(6, 6))
@@ -91,7 +95,8 @@ ax.set_ylim(-5 * Rs, 5 * Rs)
 ax.set_xticks([])
 ax.set_yticks([])
 ax.set_aspect('equal', adjustable='datalim')  # Keep black hole perfectly circular
-ax.set_title("Animated 2D Black Hole Simulation", color="white")
+ax.set_title("Animated 2D Black Hole Simulation", color="white", size = "x-large")
+ax.set_xlabel(b_name, color = "white", size = "x-large")
 
 ani = animation.FuncAnimation(fig, update, frames=200, interval=50, blit=True)
 

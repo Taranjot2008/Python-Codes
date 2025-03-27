@@ -44,33 +44,56 @@ def draw_event_horizon():
         glVertex3f(x, y, 0)  # Draw in the XY plane
     glEnd()
 
-# Function to draw the accretion disk in the XY plane
+# Function to draw the accretion disk in the XY plane with gradient
 def draw_accretion_disk_xy():
-    glColor3f(1, 1, 0)  # Yellow color for the accretion disk
+    num_segments = 32
+    inner_radius = 0.25
+    outer_radius = 0.35
+
+    # Draw the outer gradient disk
+    glBegin(GL_TRIANGLE_FAN)
+    glColor3f(1.0, 1.0, 0.0)  # Center color (yellow)
+    glVertex3f(0.0, 0.0, 0)  # Center of the disk
+
+    for i in range(num_segments + 1):
+        angle = 2 * np.pi * i / num_segments
+        x = outer_radius * np.cos(angle)
+        y = outer_radius * np.sin(angle)
+        # Set color based on position for gradient effect
+        glColor3f(1.0, 0.5 + 0.5 * np.sin(angle), 0.0)  # Gradient from yellow to orange
+        glVertex3f(x, y, 0)  # Outer vertices
+    glEnd()
+
+    # Draw the inner disk to cover the center
+    glColor3f(0.0, 0.0, 0.0)  # Black color for the inner part
     quadric = gluNewQuadric()
-    gluQuadricNormals(quadric, GLU_SMOOTH)
-
-    # Draw the disk in the XY plane
-    glPushMatrix()
-    glTranslatef(0.0, 0.0, 0)  # Position the disk at the center
-    gluDisk(quadric, 0.25, 0.35, 32, 1)  # Draw a disk with inner radius 0.25 and outer radius 0.35
-    glPopMatrix()
-
+    gluDisk(quadric, 0.0, inner_radius, 32, 1)  # Draw the inner disk
     gluDeleteQuadric(quadric)
 
-# Function to draw the accretion disk in the XZ plane
+# Function to draw the accretion disk in the XZ plane with gradient
 def draw_accretion_disk_xz():
-    glColor3f(1, 1, 0)  # Yellow color for the accretion disk
+    num_segments = 32
+    inner_radius = 0.25
+    outer_radius = 0.35
+
+    # Draw the outer gradient disk
+    glBegin(GL_TRIANGLE_FAN)
+    glColor3f(1.0, 1.0, 0.0)  # Center color (yellow)
+    glVertex3f(0.0, 0, 0)  # Center of the disk
+
+    for i in range(num_segments + 1):
+        angle = 2 * np.pi * i / num_segments
+        x = outer_radius * np.cos(angle)
+        z = outer_radius * np.sin(angle)
+        # Set color based on position for gradient effect
+        glColor3f(1.0, 0.5 + 0.5 * np.sin(angle), 0.0)  # Gradient from yellow to orange
+        glVertex3f(x, 0, z)  # Outer vertices
+    glEnd()
+
+    # Draw the inner disk to cover the center
+    glColor3f(0.0, 0.0, 0.0)  # Black color for the inner part
     quadric = gluNewQuadric()
-    gluQuadricNormals(quadric, GLU_SMOOTH)
-
-    # Draw the disk in the XZ plane
-    glPushMatrix()
-    glRotatef(90, 1, 0, 0)  # Rotate 90 degrees around the X-axis to position in the XZ plane
-    glTranslatef(0.0, 0.0, 0)  # Position the disk at the center
-    gluDisk(quadric, 0.25, 0.35, 32, 1)  # Draw a disk with inner radius 0.25 and outer radius 0.35
-    glPopMatrix()
-
+    gluDisk(quadric, 0.0, inner_radius, 32, 1)  # Draw the inner disk
     gluDeleteQuadric(quadric)
 
 # Main function to set up the OpenGL context and run the loop
@@ -91,6 +114,8 @@ def main():
                 return
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        glRotatef(0.1, 1, 0, 0)
 
         draw_stars(stars)  # Draw the starfield
         draw_black_hole()  # Draw the black hole
