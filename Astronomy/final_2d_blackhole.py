@@ -61,7 +61,7 @@ def gravitational_lens(x, y, Rs, time):
     return x_warped, y_warped
 
 # Generate Initial Star Positions
-num_stars = 2500
+num_stars = 20000
 x_stars_orig = np.random.uniform(-30 * Rs, 30 * Rs, num_stars)
 y_stars_orig = np.random.uniform(-30 * Rs, 30 * Rs, num_stars)
 stars, = ax.plot([], [], 'w.', markersize=2, zorder=1)

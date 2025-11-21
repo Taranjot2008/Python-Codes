@@ -1,0 +1,15 @@
+The numbers of astronauts currently in space are:12
+The current astronauts are:
+Oleg Kononenko on board: ISS
+Nikolai Chub on board: ISS
+Tracy Caldwell Dyson on board: ISS
+Matthew Dominick on board: ISS
+Michael Barratt on board: ISS
+Jeanette Epps on board: ISS
+Alexander Grebenkin on board: ISS
+Butch Wilmore on board: ISS
+Sunita Williams on board: ISS
+Li Guangsu on board: Tiangong
+Li Cong on board: Tiangong
+Ye Guangfu on board: Tiangong
+Current location of the user is: [44.6427, -63.5769]
